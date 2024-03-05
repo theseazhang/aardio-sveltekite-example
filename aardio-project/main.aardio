@@ -1,0 +1,46 @@
+//RUNAS//
+import win.ui
+/*DSG{{*/
+mainForm = win.form(text="aardio+svelteKit";right=959;bottom=639)
+mainForm.add()
+/*}}*/
+
+//多开限制
+import win.ui.atom
+var atom, hwnd = mainForm.atom("273B1A4F-50C2-4954-984D-198C5D6CD87A")
+if(!atom) return win.setForeground(hwnd);
+
+//设置最小缩放范围
+import win.ui.minmax
+var screenWidth, screenHeight = ::GetSystemMetrics(0), ::GetSystemMetrics(0x1)
+var minWidth, minHeight = 960, 640
+if(screenWidth < minWidth) minWidth = screenWidth - 40
+if(screenHeight < minHeight) minHeight = screenHeight - 40
+mainForm.width = minWidth
+mainForm.height = minHeight
+win.ui.minmax(mainForm, minWidth, minHeight)
+
+//webview2浏览器
+import web.view
+var wb = web.view(mainForm,,0)
+if(!wb) {
+	mainForm.msgboxErr("wb 启动失败")
+	return;
+}
+
+wb.export({
+	aardio_msgbox = function(str){
+		mainForm.msgbox(str)
+	};
+})
+
+import wsock.tcp.simpleHttpServer
+if(_STUDIO_INVOKED){
+	wb.go("http://localhost:5173/")
+}
+else {
+	wb.go('/build/index.html')
+}
+
+mainForm.show();
+return win.loopMessage();
