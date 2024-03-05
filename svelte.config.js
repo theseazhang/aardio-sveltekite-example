@@ -19,7 +19,6 @@ const config = {
 	},
 	preprocess: [vitePreprocess({})],
 	onwarn: (warning, handler) => {
-		if (warning.code === 'svelte(missing-declaration)') return;
 		if (warning.code.startsWith('a11y-')) return;
 		handler(warning);
 	}

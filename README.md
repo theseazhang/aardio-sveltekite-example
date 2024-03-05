@@ -64,3 +64,9 @@ const config = {
 
 这是因为svelte不能识别aardio导入的js函数。在函数调用的行上方，添加
 `<!-- svelte-ignore missing-declaration -->`即可消除下划线，在vscode中支持快速修复.
+
+3. aardio项目
+
+aardio项目位于aardio-project目录下, 已自动配置build输出到dist目录下.
+当然你也可以另行配置aardio工程, 只要修改下`svelte.config.js`中打包的输出目录即可.
+或者直接打包后复制build文件夹到aardio工程的dist目录下.
